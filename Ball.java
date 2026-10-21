@@ -22,7 +22,7 @@ public class Ball{
      * balls then they are overlapping
      */
     public boolean overlap(Ball b){
-        //do this
+        return this.
 
     }
 

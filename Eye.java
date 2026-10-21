@@ -111,6 +111,13 @@ public class Eye {
         return ( (slope * (pupX - eyeCenterX)) + eyeCenterY );
     }
     
+    public int getPupilX() {
+        return pupilX;
+    }
+
+    public int getPupilY() {
+        return pupilY;
+    }
     
     
 
