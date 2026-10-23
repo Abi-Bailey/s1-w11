@@ -65,8 +65,13 @@ public class Eye {
         // distance from click to eye center
         int deltaX = clickX - eyeCenterX;
         int deltaY = clickY - eyeCenterY;
+        
+        if (inEye(clickX, clickY)) {
+            pupilX = clickX;
+            pupilY = clickY;
+        } 
 
-        if (deltaX == 0) {
+        else if (deltaX == 0) {
             //first check if the click was exactly aligned vertically with eye center
             // why?  In general we need to calculate a slope, and perfect vertical has an infinite
             // slope, which will cause an error.  So, this is a special case.
@@ -119,9 +124,14 @@ public class Eye {
         return pupilY;
     }
     
-    
+    public double square(double n){
+        return n * n;
+    }
 
-
+    public boolean inEye(int mouseX, int mouseY) {
+        double dist = square(mouseX - eyeCenterX) / square(eyeWidth/2-pupilRadius) + square(mouseY - eyeCenterY) / square(eyeHeight/2-pupilRadius);
+        return (dist <= 1);    
+    }
 
 
 }  //end class

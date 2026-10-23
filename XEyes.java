@@ -20,6 +20,7 @@ public class XEyes extends JPanel implements MouseListener, MouseMotionListener{
     // Each eye gets an instance variable.
     private Eye eye_1;
     private Eye eye_2;
+    private Eye eye_3;
 
     private int mouseX;
     private int mouseY;
@@ -37,6 +38,8 @@ public class XEyes extends JPanel implements MouseListener, MouseMotionListener{
         // these eyes fit right on Einstein's head.  
         eye_1 = new Eye(269, 290, 49, 37);
         eye_2 = new Eye(372, 290, 49, 37);
+        eye_3 = new Eye(320, 250, 49, 37);
+
         addMouseListener(this);
         addMouseMotionListener(this);
         myFrame.setVisible(true);
@@ -58,15 +61,14 @@ public class XEyes extends JPanel implements MouseListener, MouseMotionListener{
 
         eye_1.draw(g);
         eye_2.draw(g);
+        eye_3.draw(g);
 
-        g.setColor(Color.red);
-        g.drawLine(eye_1.getPupilX(), eye_1.getPupilY(), mouseX, mouseY);
-        g.drawLine(eye_2.getPupilX(), eye_2.getPupilY(), mouseX, mouseY);
-    }
-
-    public boolean inEye (int mouseX, int mouseY) {
-        double dist = square(mouseX - eyeCenterX) / square(eyeWidth/2-pupilRadius) + square(mouseY - eyeCenterY) / square(eyeHeight/2-pupilRadius);
-        return (dist <= 1);    
+        if (mouseX != 0 && mouseY != 0){
+            g.setColor(Color.red);
+            g.drawLine(eye_1.getPupilX(), eye_1.getPupilY(), mouseX, mouseY);
+            g.drawLine(eye_2.getPupilX(), eye_2.getPupilY(), mouseX, mouseY);
+            g.drawLine(eye_3.getPupilX(), eye_3.getPupilY(), mouseX, mouseY);
+        }   
     }
     
     // move the pupil when the mouse is clicked
@@ -74,8 +76,11 @@ public class XEyes extends JPanel implements MouseListener, MouseMotionListener{
         mouseX = event.getX();
         mouseY = event.getY();
 
-        eye_1.movePupil(mouseX, mouseY);
-        eye_2.movePupil(mouseX, mouseY);
+        if (mouseX != 0 && mouseY != 0){
+            eye_1.movePupil(mouseX, mouseY);
+            eye_2.movePupil(mouseX, mouseY);
+            eye_3.movePupil(mouseX, mouseY);
+        }
         
         repaint();
     }
@@ -98,6 +103,7 @@ public class XEyes extends JPanel implements MouseListener, MouseMotionListener{
 
         eye_1.movePupil(mouseX, mouseY);
         eye_2.movePupil(mouseX, mouseY);
+        eye_3.movePupil(mouseX, mouseY);
         
         repaint();
     }
@@ -108,6 +114,7 @@ public class XEyes extends JPanel implements MouseListener, MouseMotionListener{
 
         eye_1.movePupil(mouseX, mouseY);
         eye_2.movePupil(mouseX, mouseY);
+        eye_3.movePupil(mouseX, mouseY);
         
         repaint();
     }
